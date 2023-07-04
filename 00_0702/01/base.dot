@@ -1,0 +1,52 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_eip.nat (expand)" [label = "aws_eip.nat", shape = "box"]
+		"[root] aws_instance.httpd_ec2 (expand)" [label = "aws_instance.httpd_ec2", shape = "box"]
+		"[root] aws_internet_gateway.igw (expand)" [label = "aws_internet_gateway.igw", shape = "box"]
+		"[root] aws_nat_gateway.nat_gw (expand)" [label = "aws_nat_gateway.nat_gw", shape = "box"]
+		"[root] aws_route.public_rtb (expand)" [label = "aws_route.public_rtb", shape = "box"]
+		"[root] aws_route_table.public_rtb (expand)" [label = "aws_route_table.public_rtb", shape = "box"]
+		"[root] aws_route_table_association.public_rtb (expand)" [label = "aws_route_table_association.public_rtb", shape = "box"]
+		"[root] aws_security_group.httpd_sg (expand)" [label = "aws_security_group.httpd_sg", shape = "box"]
+		"[root] aws_subnet.public_subnet (expand)" [label = "aws_subnet.public_subnet", shape = "box"]
+		"[root] aws_vpc.vpc (expand)" [label = "aws_vpc.vpc", shape = "box"]
+		"[root] data.aws_ami.ubuntu (expand)" [label = "data.aws_ami.ubuntu", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.instance_spec" [label = "var.instance_spec", shape = "note"]
+		"[root] var.key_pair" [label = "var.key_pair", shape = "note"]
+		"[root] var.nickname" [label = "var.nickname", shape = "note"]
+		"[root] var.prefix" [label = "var.prefix", shape = "note"]
+		"[root] var.region" [label = "var.region", shape = "note"]
+		"[root] aws_eip.nat (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_instance.httpd_ec2 (expand)" -> "[root] aws_security_group.httpd_sg (expand)"
+		"[root] aws_instance.httpd_ec2 (expand)" -> "[root] aws_subnet.public_subnet (expand)"
+		"[root] aws_instance.httpd_ec2 (expand)" -> "[root] data.aws_ami.ubuntu (expand)"
+		"[root] aws_instance.httpd_ec2 (expand)" -> "[root] var.instance_spec"
+		"[root] aws_instance.httpd_ec2 (expand)" -> "[root] var.key_pair"
+		"[root] aws_instance.httpd_ec2 (expand)" -> "[root] var.nickname"
+		"[root] aws_internet_gateway.igw (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_nat_gateway.nat_gw (expand)" -> "[root] aws_eip.nat (expand)"
+		"[root] aws_nat_gateway.nat_gw (expand)" -> "[root] aws_subnet.public_subnet (expand)"
+		"[root] aws_route.public_rtb (expand)" -> "[root] aws_internet_gateway.igw (expand)"
+		"[root] aws_route.public_rtb (expand)" -> "[root] aws_route_table.public_rtb (expand)"
+		"[root] aws_route_table.public_rtb (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_route_table_association.public_rtb (expand)" -> "[root] aws_route_table.public_rtb (expand)"
+		"[root] aws_route_table_association.public_rtb (expand)" -> "[root] aws_subnet.public_subnet (expand)"
+		"[root] aws_security_group.httpd_sg (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_security_group.httpd_sg (expand)" -> "[root] var.prefix"
+		"[root] aws_subnet.public_subnet (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_vpc.vpc (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_ami.ubuntu (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] output.nomad_server_ip (expand)" -> "[root] aws_instance.httpd_ec2 (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_instance.httpd_ec2 (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_nat_gateway.nat_gw (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route.public_rtb (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.public_rtb (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" -> "[root] var.region"
+		"[root] root" -> "[root] output.nomad_server_ip (expand)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+

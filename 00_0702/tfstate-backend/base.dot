@@ -1,0 +1,25 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_dynamodb_table.mydynamodbtable (expand)" [label = "aws_dynamodb_table.mydynamodbtable", shape = "box"]
+		"[root] aws_s3_bucket.mys3bucket (expand)" [label = "aws_s3_bucket.mys3bucket", shape = "box"]
+		"[root] aws_s3_bucket_versioning.mys3bucket_versioning (expand)" [label = "aws_s3_bucket_versioning.mys3bucket_versioning", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.nickname" [label = "var.nickname", shape = "note"]
+		"[root] var.region" [label = "var.region", shape = "note"]
+		"[root] aws_dynamodb_table.mydynamodbtable (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_s3_bucket.mys3bucket (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_s3_bucket.mys3bucket (expand)" -> "[root] var.nickname"
+		"[root] aws_s3_bucket_versioning.mys3bucket_versioning (expand)" -> "[root] aws_s3_bucket.mys3bucket (expand)"
+		"[root] output.dynamodb_table_name (expand)" -> "[root] aws_dynamodb_table.mydynamodbtable (expand)"
+		"[root] output.s3_bucket_arn (expand)" -> "[root] aws_s3_bucket.mys3bucket (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_dynamodb_table.mydynamodbtable (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_s3_bucket_versioning.mys3bucket_versioning (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" -> "[root] var.region"
+		"[root] root" -> "[root] output.dynamodb_table_name (expand)"
+		"[root] root" -> "[root] output.s3_bucket_arn (expand)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+
