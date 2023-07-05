@@ -39,16 +39,17 @@ nomad_server_ip = "3.34.145.180"
 ```
 - 결과화면
 
-  ![img](01/img/img1.png)
+  ![img](./01/img/img1.png)
 
 
-2. AWS S3 및 Backend 사용
+2. AWS S3 및 Backend 사용 (backend를 사용할 때의 S3와 RDS는 4번에서 설명)
 - terraform.tf
    -  Terraform backend를 S3와 RDS를 이용하여 구성, S3와 RDS는 tfstate-backend 디렉토리에서 설명 
-   
-  ![img](01/img/img2.png)
+   -  Terraform block에서 다음과 같이 key를 설정하면 S3에 적용
+
+  ![img](./01/img/img2.png)
 - apply 이후 S3 적용 상태
-  ![img](01/img/img3.png)        
+  ![img](./01/img/img3.png)        
 
 
 3. 1.  lifecycle의 precondition(Function을 사용하지 않음)
