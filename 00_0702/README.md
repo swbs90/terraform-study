@@ -26,14 +26,34 @@
    -  apache 설치 및 nickname이 있는 html파일을 만들기 위한 스크립트 파일
 - base.dot
    -  terraform code의 도식화된 파일
+- 실행
+```bash
+$ pwd
+~/Terraform_study/terraform-study/00_0702/01
+$ terraform apply -auto-approve
+Apply complete! Resources: 10 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+nomad_server_ip = "3.34.145.180"
+```
+- 결과화면
+
+  ![img](01/img/img1.png)
+
 
 2. AWS S3 및 Backend 사용
 - terraform.tf
-   -  Terraform backend를 S3와 RDS를 이용하여 구성, S3와 RDS는 tfstate-backend 디렉토리에서 설명
+   -  Terraform backend를 S3와 RDS를 이용하여 구성, S3와 RDS는 tfstate-backend 디렉토리에서 설명 
+   
+  ![img](01/img/img2.png)
+- apply 이후 S3 적용 상태
+  ![img](01/img/img3.png)        
+
 
 3. 1.  lifecycle의 precondition(Function을 사용하지 않음)
 - precondition.tf
-   -  step0.txt ~ step6.txt 총 7개의 파일 이름 중 하나가 일치 시 검증 조건 만족으로 코드\
+   -  step0.txt ~ step6.txt 총 7개의 파일 이름 중 하나가 일치 시 검증 조건 만족으로 코드
 
 3. 2.  lifecycle의 precondition(Function을 사용하지 않음)
 - precondition.tf

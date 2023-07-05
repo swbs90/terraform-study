@@ -1,19 +1,19 @@
 ################################################################################################
 # AWS Security Group
 resource "aws_security_group" "httpd_sg" {
-  name   = "${var.prefix}-httpd"
+  name        = "${var.prefix}-httpd"
   description = "${var.prefix}-httpd"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id      = aws_vpc.vpc.id
   ingress {
-    from_port = 80
-    to_port   = 80
-    protocol  = "tcp"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
@@ -23,7 +23,7 @@ resource "aws_security_group" "httpd_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   lifecycle {
-     create_before_destroy = true
+    create_before_destroy = true
   }
 }
 
@@ -40,18 +40,18 @@ resource "aws_instance" "httpd_ec2" {
     aws_security_group.httpd_sg.id
   ]
   tags = {
-    Name         = "${var.prefix}-httpd-ec2"
+    Name = "${var.prefix}-httpd-ec2"
   }
-  user_data            = templatefile("./template/install.tpl",
-  {
-    nickname = var.nickname
+  user_data = templatefile("./template/install.tpl",
+    {
+      nickname = var.nickname
   })
 
   lifecycle {
     ignore_changes = [
       user_data
     ]
-  }  
+  }
 }
 
 #################################################################################################
