@@ -49,16 +49,42 @@ nomad_server_ip = "3.34.145.180"
 
   ![img](./01/img/img2.png)
 - apply 이후 S3 적용 상태
-  ![img](./01/img/img3.png)        
+  ![img](./01/img/img3.png)
 
 
 3. 1.  lifecycle의 precondition(Function을 사용하지 않음)
 - precondition.tf
    -  step0.txt ~ step6.txt 총 7개의 파일 이름 중 하나가 일치 시 검증 조건 만족으로 코드
+   -  code 리뷰 
+      - OR 조건으로 list에서 값을 하나씩 꺼내와서 file_name 변수의 값과 체크
+```bash
+...
+  lifecycle {
+    precondition {
+      condition = (var.file_list[0] == var.file_name || var.file_list[1] == var.file_name ||
+        var.file_list[2] == var.file_name || var.file_list[3] == var.file_name ||
+      var.file_list[4] == var.file_name || var.file_list[5] == var.file_name || var.file_list[6] == var.file_name)
+      error_message = "file name is not file_list"
+    }
+  }
+...
+```
 
 3. 2.  lifecycle의 precondition(Function을 사용하지 않음)
 - precondition.tf
    -  step0.txt ~ step6.txt 총 7개의 파일 이름 중 하나가 일치 시 검증 조건 만족으로 코드
+   -  code 리뷰 
+      - contains 함수를 이용하여 list에 있는 인자들 중 file_name이 있는 지 확인 
+```bash
+...
+  lifecycle {
+    precondition {
+      condition     = contains(var.file_list, var.file_name)
+      error_message = "file name is not file_list"
+    }
+  }
+...
+```
 
 4. AWS 서비스 리소스 배포 + 리소스 생성 그래프 확인
 - backend.tf
