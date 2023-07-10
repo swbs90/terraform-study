@@ -23,7 +23,7 @@ resource "aws_dynamodb_table" "mydynamodbtable" {
 
   attribute {
     name = "LockID" 
-    type = "S" #
+    type = "S" # LockID를 String으로 저장
   }
 }
 
