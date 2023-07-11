@@ -43,8 +43,8 @@ resource "aws_instance" "httpd_ec2" {
     Name = "${var.prefix}-httpd-ec2"
   }
   user_data = templatefile("./template/install.tpl",
-    {
-      nickname = var.nickname
+  {
+      nickname = lookup(var.study_group,var.nickname,"another_team")
   })
 
   lifecycle {

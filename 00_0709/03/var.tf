@@ -21,3 +21,14 @@ variable "key_pair" {
 variable "nickname" {
   description = "my nick name"
 }
+
+# nickname을 체크하고 그에 맞는 반환 값을 미리 정해둔다.
+variable "study_group" {
+  description = "my study group members"
+  default     = {
+    "ung": "member1", 
+    "yu" : "member2", 
+    "chang": "member3",
+    "jun"  : "member4"
+  }
+}
